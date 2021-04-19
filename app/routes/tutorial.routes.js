@@ -1,6 +1,7 @@
 module.exports = app => {
     const tutorials = require("../controllers/tutorial.controller.js");
-    const controllers = require("../controllers/file.controller.js");
+    const uploadController = require("../controllers/upload.controller.js");
+    const upload = require("../middleware/upload");
 
     var router = require("express").Router();
 
@@ -25,12 +26,15 @@ module.exports = app => {
     // Delete all Tutorials
     router.delete("/", tutorials.deleteAll);
 
-    // upload
-    router.post("/upload", controllers.upload);
-    // list files
-    router.get("/files", controllers.getListFiles);
-    // download files
-    router.get("/files/:name", controllers.download);
+    // // upload
+    // router.post("/upload", controllers.upload);
+    // // list files
+    // router.get("/files", controllers.getListFiles);
+    // // download files
+    // router.get("/files/:name", controllers.download);
+
+    router.post("/upload", upload.single("file"), uploadController.uploadFiles);
+
 
     app.use('/api/tutorials', router);
     // app.use(router);
