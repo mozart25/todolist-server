@@ -4,6 +4,7 @@ module.exports = {
     PASSWORD: "qwe123,.",
     DB: "todolist",
     dialect: "mysql",
+    timezone: '+09:00',
     pool: {
         max: 5,
         min: 0,

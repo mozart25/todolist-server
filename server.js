@@ -21,7 +21,7 @@ const db = require("./app/models");
 db.sequelize.sync();
 
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome to bezkoder application." });
+    res.json({ message: "Welcome to lee's application." });
 });
 
 require("./app/routes/tutorial.routes")(app);
