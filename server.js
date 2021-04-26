@@ -1,6 +1,3 @@
-require("./app/routes/tutorial.routes")(app);
-require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
 
 
 const express = require("express");
@@ -9,6 +6,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
+
+require("./app/routes/tutorial.routes")(app);
+require('./app/routes/auth.routes')(app);
+require('./app/routes/user.routes')(app);
+
 
 global.__basedir = __dirname;
 
