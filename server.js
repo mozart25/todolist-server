@@ -1,5 +1,11 @@
+require("./app/routes/tutorial.routes")(app);
+require('./app/routes/auth.routes')(app);
+require('./app/routes/user.routes')(app);
+
+
 const express = require("express");
 const bodyParser = require("body-parser");
+
 const cors = require("cors");
 
 const app = express();
@@ -11,6 +17,7 @@ var corsOptions = {
 };
 
 // app.use(cors(corsOptions));
+app.use(cors());
 
 
 app.use(bodyParser.json());
@@ -21,21 +28,17 @@ const db = require("./app/models");
 const Role = db.role;
 
 db.sequelize.sync();
-db.sequelize.sync({ force: true }).then(() => {
-    console.log('Drop and Resync Database with { force: true }');
-    initial();
-});
+// db.sequelize.sync({ force: true }).then(() => {
+//     console.log('Drop and Resync Database with { force: true }');
+//     initial();
+// });
 
 
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to lee's application." });
 });
 
-require("./app/routes/tutorial.routes")(app);
-require('./app/routes/auth.routes')(app);
-require('./app/routes/user.routes')(app);
 
-app.use(cors());
 
 // require("./app/routes")(app);
 
