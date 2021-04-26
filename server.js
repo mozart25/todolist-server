@@ -11,7 +11,6 @@ var corsOptions = {
 };
 
 // app.use(cors(corsOptions));
-app.use(cors());
 
 
 app.use(bodyParser.json());
@@ -35,6 +34,8 @@ app.get("/", (req, res) => {
 require("./app/routes/tutorial.routes")(app);
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+
+app.use(cors());
 
 // require("./app/routes")(app);
 
