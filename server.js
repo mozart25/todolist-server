@@ -2,12 +2,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-const path = __dirname + '/app/views/';
+// const path = __dirname + '/app/views/';
 
 
 const app = express();
 
-app.use(express.static(path));
+// app.use(express.static(path));
 
 app.use(cors());
 
@@ -27,13 +27,13 @@ db.sequelize.sync();
 // });
 
 
-// app.get("/", (req, res) => {
-//     res.json({ message: "Welcome to lee's application." });
-// });
-
-app.get('/', function (req, res) {
-    res.sendFile(path + "index.html");
+app.get("/", (req, res) => {
+    res.json({ message: "Welcome to lee's application." });
 });
+
+// app.get('/', function (req, res) {
+//     res.sendFile(path + "index.html");
+// });
 
 require("./app/routes/tutorial.routes")(app);
 require('./app/routes/auth.routes')(app);
