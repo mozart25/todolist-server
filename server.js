@@ -1,11 +1,14 @@
-
-
 const express = require("express");
 const bodyParser = require("body-parser");
-
 const cors = require("cors");
 
+const path = __dirname + '/app/views/';
+
+
 const app = express();
+
+app.use(express.static(path));
+
 app.use(cors());
 
 global.__basedir = __dirname;
