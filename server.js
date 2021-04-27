@@ -27,8 +27,12 @@ db.sequelize.sync();
 // });
 
 
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome to lee's application." });
+// app.get("/", (req, res) => {
+//     res.json({ message: "Welcome to lee's application." });
+// });
+
+app.get('/', function (req, res) {
+    res.sendFile(path + "index.html");
 });
 
 require("./app/routes/tutorial.routes")(app);
