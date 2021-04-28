@@ -52,28 +52,19 @@ exports.create = (req, res) => {
 
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
-    const { page, size, title } = req.query;
-
+    const title = req.query.title;
     var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-
-    const { limit, offset } = getPagination(page, size);
-
 
     Tutorial.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
-    // Tutorial.findAndCountAll({ where: condition, limit, offset })
-    //     .then(data => {
-    //         const response = getPagingData(data, page, limit);
-    //         res.send(response);
-    //     })
-    //     .catch(err => {
-    //         res.status(500).send({
-    //             message:
-    //                 err.message || "Some error occurred while retrieving tutorials."
-    //         });
-    //     });
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving tutorials."
+            });
+        });
 };
 
 // Find a single Tutorial with an id
@@ -161,21 +152,22 @@ exports.deleteAll = (req, res) => {
 exports.findAllPublished = (req, res) => {
 
     const { page, size } = req.query;
+    console.log("page", page, "size", size)
     const { limit, offset } = getPagination(page, size);
 
     Tutorial.findAll({ where: { published: true } })
         .then(data => {
             res.send(data);
         })
-    // Tutorial.findAndCountAll({ where: { published: true }, limit, offset })
-    //     .then(data => {
-    //         const response = getPagingData(data, page, limit);
-    //         res.send(response);
-    //     })
-    //     .catch(err => {
-    //         res.status(500).send({
-    //             message:
-    //                 err.message || "Some error occurred while retrieving tutorials."
-    //         });
-    //     });
+        // Tutorial.findAndCountAll({ where: { published: true }, limit, offset })
+        //     .then(data => {
+        //         const response = getPagingData(data, page, limit);
+        //         res.send(response);
+        //     })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving tutorials."
+            });
+        });
 };
